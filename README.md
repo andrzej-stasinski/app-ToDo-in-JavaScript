@@ -9,7 +9,7 @@
 * show tasks as list
 * marking tasks as completed
 * delete chosen task
-
+* app remember todo list in browser (refreshing the page doesn't cause any data loss)
 
 
 
