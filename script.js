@@ -193,7 +193,11 @@ const init = function(selector) {
     mainContainer.appendChild(app)
 }
 
+// init()
 init('.root')
+
+
+
 
 
 
