@@ -6,10 +6,7 @@ const initApp = function() {
     // -------------------------------
     let AppKey = ''
     let mainContainer = null
-    let tasks = [
-        {id: 1, name: 'Wyrzucić śmieci', isCompleted: true},
-        {id: 2, name: 'Kupić piwo', isCompleted: false},
-    ]
+    let tasks = []
     let newToDoName = ''
     const maxInput = 25
 
@@ -23,7 +20,6 @@ const initApp = function() {
 
         input.addEventListener('input', function(e) {
             const value = e.target.value
-            console.log('input', value.length)
             if(value.length > maxInput) {
                 input.maxLength = maxInput + 1
                 input.classList.add('input-error')
@@ -55,7 +51,6 @@ const initApp = function() {
 
         container.addEventListener('submit', function(event) {
             event.preventDefault()
-            console.log('submit')
 
             if(newToDoName.length === 0) {
                 renderInput.classList.add('input-error')
@@ -70,7 +65,6 @@ const initApp = function() {
                 name: newToDoName,
                 isCompleted: false
             })
-
             newToDoName = ''
             update()        
         })
@@ -98,7 +92,6 @@ const initApp = function() {
         button.textContent = '[ X ]'
         button.classList.add('task__button--button')
         button.addEventListener('click', function() {
-            console.log('id ', id)
             onTaskDelete(id)
         })
         return button
@@ -129,10 +122,7 @@ const initApp = function() {
             renderElementName.classList.add('task__completed')
         }
         renderElementName.addEventListener('click', function() {
-            console.log('click')
-            console.log(task.name)
             task.isCompleted = !task.isCompleted
-
             update()
         })
 
@@ -188,7 +178,6 @@ const initApp = function() {
     const loadLocalStorage = function() {
         let state = localStorage.getItem(AppKey)
         if(!state) return
-        // console.log(state)
         state = JSON.parse(state)
         tasks = state.tasks
         newToDoName = state.newToDoName
