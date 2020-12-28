@@ -10,6 +10,7 @@
 * marking tasks as completed - by through task 
 * delete chosen task
 * app remember todo list in browser (refreshing the page doesn't cause any data loss)
+* you can create several apps todo - each of then will be remember its own data
 
 #### link to app - you can try app
 <a href='https://andrzej-stasinski.github.io/app-ToDo-in-JavaScript/' target='_blank'>App ToDo</a>

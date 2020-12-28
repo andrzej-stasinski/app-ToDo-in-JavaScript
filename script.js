@@ -11,6 +11,7 @@ const initApp = function() {
         {id: 2, name: 'Kupić piwo', isCompleted: false},
     ]
     let newToDoName = ''
+    const maxInput = 25
 
     // form 
     // ---------------------------------
@@ -19,11 +20,18 @@ const initApp = function() {
         const input = document.createElement('input')
         input.classList.add('task-form__input')
         input.value = newToDoName
-        input.maxLength = 25
+
         input.addEventListener('input', function(e) {
             const value = e.target.value
-                newToDoName = value
-                update()            
+            console.log('input', value.length)
+            if(value.length > maxInput) {
+                input.maxLength = maxInput + 1
+                input.classList.add('input-error')
+            } else {
+                input.classList.remove('input-error')
+                    
+            } 
+            newToDoName = value.slice(0,maxInput)   
         })
         setTimeout(() => input.focus(),0)
         return input
@@ -49,6 +57,13 @@ const initApp = function() {
             event.preventDefault()
             console.log('submit')
 
+            if(newToDoName.length === 0) {
+                renderInput.classList.add('input-error')
+                return
+            } else {
+                renderInput.classList.remove('input-error')
+            }
+
             const id = Math.floor(Math.random() * 1000)
             tasks = tasks.concat({
                 id: id,
@@ -65,7 +80,7 @@ const initApp = function() {
         return container 
     }
 
-    // Lista elementów
+    // List of tasks
     // ===============================
     const appendArray = function(array, container) {
         array.forEach(el => {
@@ -194,6 +209,9 @@ const initApp = function() {
 
     return init
 }
+
+
+
 
 
 
