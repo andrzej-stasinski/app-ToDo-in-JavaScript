@@ -1,3 +1,6 @@
+.root {
+    margin: 0;
+}
 .todo__task {
     color: grey;
     cursor: pointer;

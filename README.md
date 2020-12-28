@@ -5,9 +5,10 @@
 * app made in JavaScript
 
 #### What does the app todo 
-* add tasks do list od tasks
+* add task to list of tasks
 * show tasks as list
 * marking tasks as completed
+* delete chosen task
 
 
 

@@ -1,12 +1,17 @@
 'use strict'
 
+// Description
+// -------------------------------
+// click w button robi submit
+// zatem w form robimy addEventListener na submit
+// input - sam Enter realizuje submit
 
 // state
 // -------------------------------
 let mainContainer = null
 let tasks = [
-    {name: 'Wyrzucić śmieci', isCompleted: true},
-    {name: 'Kupić piwo', isCompleted: false},
+    {id: 1, name: 'Wyrzucić śmieci', isCompleted: true},
+    {id: 2, name: 'Kupić piwo', isCompleted: false},
 ]
 let newToDoName = ''
 
@@ -45,7 +50,10 @@ const renderNewTaskForm = function() {
     container.addEventListener('submit', function(event) {
         event.preventDefault()
         console.log('submit')
+
+        const id = Math.floor(Math.random() * 1000)
         tasks = tasks.concat({
+            id: id,
             name: newToDoName,
             isCompleted: false
         })
@@ -59,26 +67,52 @@ const renderNewTaskForm = function() {
     return container 
 }
 // Lista elementów
-// -----------------------------------
+// ===============================
 const appendArray = function(array, container) {
     array.forEach(el => {
         container.appendChild(el)
     });
 }
+const onTaskDelete = function(id) {
+    tasks = tasks.filter(task => task.id !== id)
+    update()
+}
+const renderButtonDelete = function(id) {
+    const button = document.createElement('button')
+    button.textContent = '[ X ]'
+    button.addEventListener('click', function() {
+        console.log('id ', id)
+        onTaskDelete(id)
+    })
+    return button
+}
+const renderTaskName = function() {
+    const taskName = document.createElement('div')
+    return taskName
+}
 const renderTask = function(task) {
     const container = document.createElement('li')
-    container.textContent = task.name
-    container.classList.add('todo__task')
+
+    const renderElementName = renderTaskName()
+    renderElementName.textContent = task.name
+    // container.textContent = task.name
+
+    renderElementName.classList.add('todo__task')
     if(task.isCompleted) {
-        container.classList.add('task__completed')
+        renderElementName.classList.add('task__completed')
     }
-    container.addEventListener('click', function() {
+    renderElementName.addEventListener('click', function() {
         console.log('click')
         console.log(task.name)
         task.isCompleted = !task.isCompleted
 
         update()
     })
+
+    const elementButtonDelete = renderButtonDelete(task.id)
+
+    container.appendChild(renderElementName)
+    container.appendChild(elementButtonDelete)
     return container  
 }
 const renderTaskList = function(tasks) {
