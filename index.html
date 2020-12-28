@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +9,17 @@
 </head>
 <body>
     <h2>App ToDo</h2>
-    <div class="root1"></div>
+
+    <div class="app1"></div>
+    <div class="app2"></div>
+
     <script src="script.js"></script>
     <script>
         const todo1 = initApp()
-        todo1('.root1')
+        todo1('.app1', 'todo1')
+
+        const todo2 = initApp()
+        todo2('.app2', 'todo2')
     </script>
 </body>
 </html>

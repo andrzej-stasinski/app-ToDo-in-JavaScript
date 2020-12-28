@@ -1,9 +1,10 @@
 'use strict'
 
 const initApp = function() {
-    
+
     // state
     // -------------------------------
+    let AppKey = ''
     let mainContainer = null
     let tasks = [
         {id: 1, name: 'Wyrzucić śmieci', isCompleted: true},
@@ -22,7 +23,6 @@ const initApp = function() {
         input.addEventListener('input', function(e) {
             const value = e.target.value
                 newToDoName = value
-                console.log(value)
                 update()            
         })
         setTimeout(() => input.focus(),0)
@@ -34,9 +34,6 @@ const initApp = function() {
         const button = document.createElement('button')
         button.classList.add('task-form__button')
         button.textContent = 'ADD TASK'
-        button.addEventListener('click', function() {
-            console.log('click')
-        })
         return button
     }
 
@@ -170,26 +167,24 @@ const initApp = function() {
             tasks: tasks,
             newToDoName: newToDoName
         }
-        localStorage.setItem(
-            'todo', 
-            JSON.stringify(state)
-            )
+        localStorage.setItem(AppKey, JSON.stringify(state))
     }
 
     const loadLocalStorage = function() {
-        let state = localStorage.getItem('todo')
+        let state = localStorage.getItem(AppKey)
         if(!state) return
-        console.log(state)
+        // console.log(state)
         state = JSON.parse(state)
         tasks = state.tasks
         newToDoName = state.newToDoName
     }
 
-    const init = function(selector) {
+    const init = function(selector, key) {
         const container = document.querySelector(selector)
         mainContainer = container
         if(!mainContainer) return console.log('Selector not exists')
-        
+
+        AppKey = key
         loadLocalStorage()
 
         const app = render()
@@ -199,17 +194,6 @@ const initApp = function() {
 
     return init
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
