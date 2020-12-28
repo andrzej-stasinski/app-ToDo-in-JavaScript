@@ -1,5 +1,6 @@
-.root {
-    margin: 0;
+.task_wrapper {
+    display: flex;
+    justify-content: space-between;
 }
 .todo__task {
     color: grey;
@@ -8,4 +9,10 @@
 .task__completed {
     text-decoration: line-through;
     color: red;
+}
+.task__button--color {
+    background-color: #ff481f69;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }

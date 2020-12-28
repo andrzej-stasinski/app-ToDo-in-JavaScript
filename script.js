@@ -1,11 +1,5 @@
 'use strict'
 
-// Description
-// -------------------------------
-// click w button robi submit
-// zatem w form robimy addEventListener na submit
-// input - sam Enter realizuje submit
-
 // state
 // -------------------------------
 let mainContainer = null
@@ -73,6 +67,7 @@ const appendArray = function(array, container) {
         container.appendChild(el)
     });
 }
+// delete - button
 const onTaskDelete = function(id) {
     tasks = tasks.filter(task => task.id !== id)
     update()
@@ -80,15 +75,23 @@ const onTaskDelete = function(id) {
 const renderButtonDelete = function(id) {
     const button = document.createElement('button')
     button.textContent = '[ X ]'
+    button.classList.add('task__button--color')
     button.addEventListener('click', function() {
         console.log('id ', id)
         onTaskDelete(id)
     })
     return button
 }
+// task name - div
 const renderTaskName = function() {
     const taskName = document.createElement('div')
     return taskName
+}
+// wrapper task
+const renderTaskWrapper = function() {
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('task_wrapper')
+    return wrapper
 }
 const renderTask = function(task) {
     const container = document.createElement('li')
@@ -111,8 +114,11 @@ const renderTask = function(task) {
 
     const elementButtonDelete = renderButtonDelete(task.id)
 
-    container.appendChild(renderElementName)
-    container.appendChild(elementButtonDelete)
+    const wrapperElement = renderTaskWrapper()
+    container.appendChild(wrapperElement)
+
+    wrapperElement.appendChild(renderElementName)
+    wrapperElement.appendChild(elementButtonDelete)
     return container  
 }
 const renderTaskList = function(tasks) {
