@@ -1,33 +1,33 @@
 'use strict'
 
 // state
+let mainContainer = null
 let tasks = [
     {name: 'Wyrzucić śmieci', isCompleted: true},
     {name: 'Kupić piwo', isCompleted: false},
 ]
-
-// input
-const renderInput = function() {
-    const input = document.createElement('input')
-    return input
-}
-// button
-const renderButton = function() {
-    const button = document.createElement('button')
-    button.textContent = 'ADD'
-    return button
-}
+let newToDoName = 'aaa'
 
 // form
 // input
 const renderNewTaskInput = function() {
     const input = document.createElement('input')
+    input.value = newToDoName
+    input.addEventListener('input', function(e) {
+        const value = e.target.value
+        newToDoName = value
+        console.log(value)
+        update()
+        
+    })
+    setTimeout(() => input.focus(),0)
     return input
 }
 // button
 const renderNewTaskButton = function() {
     const button = document.createElement('button')
     button.textContent = 'ADD in FORM'
+
     return button
 }
 const renderNewTaskForm = function() {
@@ -56,7 +56,6 @@ const renderTask = function(task) {
     }
     return container  
 }
-
 const renderTaskList = function(tasks) {
     const container = document.createElement('ol')
     const tasksElements = tasks.map(task => {
@@ -73,24 +72,25 @@ const renderTaskList = function(tasks) {
 const render = function() {
     const container = document.createElement('div')
 
-    const renderElementInput  = renderInput()
-    const renderElementButton = renderButton()
     const renderElementForm   = renderNewTaskForm()
     const renderTasksElements = renderTaskList(tasks)
 
-    container.appendChild(renderElementInput)
-    container.appendChild(renderElementButton)
     container.appendChild(renderElementForm)
     container.appendChild(renderTasksElements)
 
     return container    
 }
-
+const update = function() {
+    mainContainer.innerHTML = ''
+    const app = render()
+    mainContainer.appendChild(app)
+}
 const init = function(selector) {
     const container = document.querySelector(selector)
-    if(!container) return console.log('Selector not exists')
+    mainContainer = container
+    if(!mainContainer) return console.log('Selector not exists')
     const app = render()
-    container.appendChild(app)
+    mainContainer.appendChild(app)
 }
 
 // init()

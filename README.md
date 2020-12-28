@@ -1,4 +1,5 @@
 ## App ToDo in JavaScript
 
 #### Features
-* app in JavaScript
+* classic app 'todo' 
+* app made in JavaScript
