@@ -8,7 +8,7 @@ html, body {
     font-size: 18px;
     color: #555;
 }
-.root {
+.app {
     width: 100%;
     max-width: 400px;
     margin: 20px auto 0;
