@@ -14,13 +14,14 @@ let newToDoName = ''
 // input
 const renderNewTaskInput = function() {
     const input = document.createElement('input')
+    input.classList.add('task-form__input')
     input.value = newToDoName
+    input.maxLength = 25
     input.addEventListener('input', function(e) {
         const value = e.target.value
-        newToDoName = value
-        console.log(value)
-        update()
-        
+            newToDoName = value
+            console.log(value)
+            update()            
     })
     setTimeout(() => input.focus(),0)
     return input
@@ -28,7 +29,8 @@ const renderNewTaskInput = function() {
 // button
 const renderNewTaskButton = function() {
     const button = document.createElement('button')
-    button.textContent = 'ADD in FORM'
+    button.classList.add('task-form__button')
+    button.textContent = 'ADD TASK'
     button.addEventListener('click', function() {
         console.log('click')
     })
@@ -37,6 +39,7 @@ const renderNewTaskButton = function() {
 // form
 const renderNewTaskForm = function() {
     const container = document.createElement('form')
+    container.classList.add('task-form')
 
     const renderInput = renderNewTaskInput()
     const renderButton = renderNewTaskButton()
@@ -75,7 +78,7 @@ const onTaskDelete = function(id) {
 const renderButtonDelete = function(id) {
     const button = document.createElement('button')
     button.textContent = '[ X ]'
-    button.classList.add('task__button--color')
+    button.classList.add('task__button--button')
     button.addEventListener('click', function() {
         console.log('id ', id)
         onTaskDelete(id)
@@ -90,17 +93,17 @@ const renderTaskName = function() {
 // wrapper task
 const renderTaskWrapper = function() {
     const wrapper = document.createElement('div')
-    wrapper.classList.add('task_wrapper')
+    wrapper.classList.add('task__wrapper')
     return wrapper
 }
 const renderTask = function(task) {
     const container = document.createElement('li')
+    container.className = 'task__element'
 
     const renderElementName = renderTaskName()
     renderElementName.textContent = task.name
-    // container.textContent = task.name
 
-    renderElementName.classList.add('todo__task')
+    renderElementName.classList.add('task__wrapper--name')
     if(task.isCompleted) {
         renderElementName.classList.add('task__completed')
     }
@@ -123,6 +126,7 @@ const renderTask = function(task) {
 }
 const renderTaskList = function(tasks) {
     const container = document.createElement('ol')
+    container.className='task'
     const tasksElements = tasks.map(task => {
         return renderTask(task)
     })
