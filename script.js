@@ -1,5 +1,6 @@
 'use strict'
 
+
 // state
 // -------------------------------
 let mainContainer = null
@@ -67,9 +68,17 @@ const appendArray = function(array, container) {
 const renderTask = function(task) {
     const container = document.createElement('li')
     container.textContent = task.name
+    container.classList.add('todo__task')
     if(task.isCompleted) {
-        container.classList.add('task_completed')
+        container.classList.add('task__completed')
     }
+    container.addEventListener('click', function() {
+        console.log('click')
+        console.log(task.name)
+        task.isCompleted = !task.isCompleted
+
+        update()
+    })
     return container  
 }
 const renderTaskList = function(tasks) {

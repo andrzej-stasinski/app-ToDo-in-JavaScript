@@ -4,11 +4,10 @@
 * classic app 'todo' 
 * app made in JavaScript
 
-#### What to do - todo
-* add tasks do state
+#### What does the app todo 
+* add tasks do list od tasks
 * show tasks as list
-
-
+* marking tasks as completed
 
 
 
