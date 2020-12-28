@@ -1,14 +1,16 @@
 'use strict'
 
 // state
+// -------------------------------
 let mainContainer = null
 let tasks = [
     {name: 'Wyrzucić śmieci', isCompleted: true},
     {name: 'Kupić piwo', isCompleted: false},
 ]
-let newToDoName = 'aaa'
+let newToDoName = ''
 
-// form
+// form 
+// ---------------------------------
 // input
 const renderNewTaskInput = function() {
     const input = document.createElement('input')
@@ -27,20 +29,36 @@ const renderNewTaskInput = function() {
 const renderNewTaskButton = function() {
     const button = document.createElement('button')
     button.textContent = 'ADD in FORM'
-
+    button.addEventListener('click', function() {
+        console.log('click')
+    })
     return button
 }
+// form
 const renderNewTaskForm = function() {
     const container = document.createElement('form')
 
     const renderInput = renderNewTaskInput()
     const renderButton = renderNewTaskButton()
+
+    container.addEventListener('submit', function(event) {
+        event.preventDefault()
+        console.log('submit')
+        tasks = tasks.concat({
+            name: newToDoName,
+            isCompleted: false
+        })
+
+        newToDoName = ''
+        update()        
+    })
+
     container.appendChild(renderInput)
     container.appendChild(renderButton)
-
     return container 
 }
 // Lista elementów
+// -----------------------------------
 const appendArray = function(array, container) {
     array.forEach(el => {
         container.appendChild(el)
@@ -48,9 +66,7 @@ const appendArray = function(array, container) {
 }
 const renderTask = function(task) {
     const container = document.createElement('li')
-    console.log(task.name)
     container.textContent = task.name
-    console.log(container)
     if(task.isCompleted) {
         container.classList.add('task_completed')
     }
@@ -59,10 +75,8 @@ const renderTask = function(task) {
 const renderTaskList = function(tasks) {
     const container = document.createElement('ol')
     const tasksElements = tasks.map(task => {
-        console.log(task)
         return renderTask(task)
     })
-    console.log(tasksElements)
     appendArray(tasksElements, container)
 
     return container     
@@ -71,7 +85,6 @@ const renderTaskList = function(tasks) {
 // render
 const render = function() {
     const container = document.createElement('div')
-
     const renderElementForm   = renderNewTaskForm()
     const renderTasksElements = renderTaskList(tasks)
 

@@ -1,0 +1,8 @@
+.todo__task {
+    color: grey;
+    cursor: pointer;
+}
+.task__completed {
+    text-decoration: line-through;
+    color: red;
+}
